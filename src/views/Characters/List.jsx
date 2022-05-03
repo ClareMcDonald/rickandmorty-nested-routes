@@ -1,10 +1,9 @@
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { Link, Route, useRouteMatch } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import Detail from './Detail';
 
 export default function List() {
-    const history = useHistory();
-    const location = useLocation();
-    const status = new URLSearchParams(location.search).get('status') ?? 'all';
+    const { url, path } = useRouteMatch();
     const [characters, setCharacters] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -14,24 +13,14 @@ export default function List() {
 
     useEffect(() => {
         const fetchCharacters = async () => {
-            setLoading(true);
-
-            const statusParam = new URLSearchParams(location.search).get('status');
-
-            const url =
-                statusParam === 'all' || !statusParam
-                    ? 'https://rickandmortyapi.com/api/character'
-                    : `https://rickandmortyapi.com/api/character?status=${statusParam}`;
-            const res = await fetch(url);
+            const res = await fetch('https://rickandmortyapi.com/api/character');
             const { results } = await res.json();
             setCharacters(results);
-            console.log(characters);
             setLoading(false);
         };
         fetchCharacters();
-    }, [location.search]);
+    }, []);
 
-    console.log(characters)
   return (
     <>
         <h1>Rick and Morty: Character List</h1>

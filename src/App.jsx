@@ -5,9 +5,9 @@ import Detail from './views/Characters/Detail';
 export default function App() {
   return (
     <Switch>
-      <Route path='/characters/:id'>
+      {/* <Route path='/characters/:id'>
         <Detail />
-      </Route>
+      </Route> */}
       <Route path='/'>
         <List />
       </Route>
