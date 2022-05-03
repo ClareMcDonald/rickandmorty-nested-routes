@@ -28,7 +28,7 @@ export default function List() {
                       <ul>
                       {characters.map((character) => (
                           <li key={character.id}>
-                              <Link to={`${url}/${character.id}`}>
+                              <Link to={`${url}${character.id}`}>
                               <h4>{character.name}</h4>
                               </Link>
                               <p>{character.species}</p>
@@ -37,7 +37,7 @@ export default function List() {
                       ))}
                     </ul>
                   </aside>
-                  <Route path={`${path}/:id`}>
+                  <Route path={`${path}:id`}>
                       <Detail characters={characters}/>
                   </Route>
             </div>
