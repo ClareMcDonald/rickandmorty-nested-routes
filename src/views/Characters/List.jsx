@@ -1,4 +1,4 @@
-import { Link, Route, useRouteMatch } from 'react-router-dom';
+import { Link, Route, useRouteMatch, Switch } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Detail from './Detail';
 
@@ -6,10 +6,6 @@ export default function List() {
     const { url, path } = useRouteMatch();
     const [characters, setCharacters] = useState([]);
     const [loading, setLoading] = useState(true);
-
-    const handleStatusChange = (event) => {
-        history.push(`/?status=${event.target.value}`);
-    }
 
     useEffect(() => {
         const fetchCharacters = async () => {
@@ -28,24 +24,22 @@ export default function List() {
             ? (<p>Loading Characters ^_^</p>)
             :
             (<div>
-                <label htmlFor='status'>Character Status:</label>    
-                <select name='status' id='status' value={status} onChange={handleStatusChange}>
-                      <option value='all'>All</option>
-                      <option value='alive'>Alive</option>
-                      <option value='dead'>Dead</option>
-                      <option value='unknown'>Unknown</option>
-                  </select>  
-                  <div>
+                  <aside>
+                      <ul>
                       {characters.map((character) => (
-                          <div key={character.id}>
-                              <Link to={`/characters/${character.id}`}>
+                          <li key={character.id}>
+                              <Link to={`${url}/${character.id}`}>
                               <h4>{character.name}</h4>
                               </Link>
                               <p>{character.species}</p>
                               <p>{character.status}</p>
-                    </div>
+                    </li>
                       ))}
-                  </div>
+                    </ul>
+                  </aside>
+                  <Route path={`${path}/:id`}>
+                      <Detail characters={characters}/>
+                  </Route>
             </div>
 
         )}      
