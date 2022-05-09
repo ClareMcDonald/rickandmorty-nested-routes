@@ -12,11 +12,11 @@ export default function Detail({ characters = [] }) {
   }, [id]);
 
   return (
-    <>
-            <h3>{character.name}</h3>
-            <p>{character.status}</p>
-            <p>{character.species}</p>
-            <img alt={`Image of ${character.name}`} src={character.image}/>
-    </>
+    <section>
+      <h3>{character.name}</h3>
+      <p>{character.status}</p>
+      <p>{character.species}</p>
+      <img alt={`Image of ${character.name}`} src={character.image}/>
+    </section>
   )
 }

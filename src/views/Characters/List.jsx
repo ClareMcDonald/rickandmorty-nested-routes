@@ -19,28 +19,28 @@ export default function List() {
 
   return (
     <>
-        <h1>Rick and Morty: Character List</h1>
         {loading
             ? (<p>Loading Characters ^_^</p>)
             :
-            (<div>
-                  <aside>
-                      <ul>
-                      {characters.map((character) => (
-                          <li key={character.id}>
-                              <Link to={`${url}${character.id}`}>
-                              <h4>{character.name}</h4>
-                              </Link>
-                              <p>{character.species}</p>
-                              <p>{character.status}</p>
+            (<>
+              <aside>
+                <h1>Rick and Morty: Character List</h1>
+                <ul>
+                  {characters.map((character) => (
+                    <li key={character.id}>
+                      <Link to={`${url}${character.id}`}>
+                      <h4>{character.name}</h4>
+                      </Link>
+                      <p>{character.species}</p>
+                      <p>{character.status}</p>
                     </li>
-                      ))}
+                  ))}
                     </ul>
-                  </aside>
-                  <Route path={`${path}:id`}>
-                      <Detail characters={characters}/>
-                  </Route>
-            </div>
+              </aside>
+              <Route path={`${path}:id`}>
+              <Detail characters={characters}/>
+              </Route>
+            </>
 
         )}      
     </>
